@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.PathSensitivity
+import org.gradle.api.tasks.ClasspathNormalizer
 import org.gradle.api.tasks.testing.AbstractTestTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
@@ -18,7 +20,7 @@ plugins {
 }
 
 group = "io.github.kotlinmania"
-version = "0.1.0-SNAPSHOT"
+version = "0.1.0"
 
 val androidSdkDir: String? =
     providers.environmentVariable("ANDROID_SDK_ROOT").orNull
@@ -75,16 +77,13 @@ kotlin {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
 
-    // tvOS
     tvosArm64 {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
     tvosSimulatorArm64 {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
-    // tvosX64 was removed in Kotlin 2.3 — "Target is no longer available."
 
-    // watchOS
     watchosArm32 {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
@@ -97,31 +96,16 @@ kotlin {
     watchosSimulatorArm64 {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
-    // watchosX64 was removed in Kotlin 2.3 — "Target is no longer available."
 
-    // Linux
     linuxX64()
     linuxArm64()
-
-    // Windows
     mingwX64()
 
-    // Android native (NDK targets — separate from the Android JVM library below)
     androidNativeArm32()
     androidNativeArm64()
     androidNativeX86()
     androidNativeX64()
 
-    // Web — JS (browser + nodejs runtimes on a single target)
-    //
-    // The asymmetric `js("jsBrowser")` + `js("jsNode")` split that the workspace
-    // template once prescribed cannot satisfy Gradle 9.x's "unique attribute
-    // sets" rule: the two targets emit `jsBrowserApiElements` and
-    // `jsNodeApiElements` consumable configurations that share an identical
-    // attribute set, and the configuration of the `:compileAndroidHostTest`
-    // task fails with "Consumable configurations with identical capabilities …
-    // must have unique attributes". This port has no Node-only `actual` so
-    // the single-target layout is also adequate at the source level.
     js {
         browser()
         nodejs()
@@ -131,6 +115,10 @@ kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
+        nodejs()
+    }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi {
         nodejs()
     }
 
@@ -165,7 +153,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.4.0")
             }
         }
-
         val commonTest by getting { dependencies { implementation(kotlin("test")) } }
     }
     jvmToolchain(21)
@@ -325,20 +312,17 @@ val codeqlSourceClasspath: Configuration by configurations.creating {
 
 dependencies {
     codeqlKotlinc("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.3.21")
-    // Mirror the commonMain dependency set, pinned to the JVM artifact variant
-    // since the JVM-flavoured kotlinx packages publish multiplatform metadata
-    // that requires a target attribute to resolve.
     codeqlSourceClasspath("org.jetbrains.kotlin:kotlin-stdlib:2.3.21")
-    codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2")
+    codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.11.0")
     codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.11.0")
     codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.11.0")
-    codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.7.1")
+    codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.8.0")
     codeqlSourceClasspath("org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.4.0")
 }
 
 val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
     description =
-        "Compile commonMain Kotlin sources with kotlinc 2.3.20 for CodeQL Java/Kotlin extraction. " +
+        "Compile commonMain Kotlin sources with kotlinc 2.3.21 for CodeQL Java/Kotlin extraction." +
         "Not part of any published artifact; intended to be wrapped by `codeql database create` " +
         "or `github/codeql-action/init` so the LD_PRELOAD tracer can attach the extractor agent " +
         "to the in-process kotlinc."
@@ -395,6 +379,12 @@ val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
             "-Xexpect-actual-classes",
         ) + sourceFiles.map { it.absolutePath }
     }
+}
+
+tasks.register<Exec>("setupAndroidSdk") {
+    group = "setup"
+    description = "Downloads and configures the project-local Android SDK."
+    commandLine("./setup-android-sdk.sh")
 }
 
 tasks.register("test") {
