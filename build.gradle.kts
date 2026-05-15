@@ -47,11 +47,26 @@ kotlin {
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
+    // ---- Maximal Kotlin 2.3.21 target coverage ----
+    //
+    // Every non-JVM Kotlin target the compiler supports is declared here.
+    // `jvm()` is intentionally omitted: this workspace standardizes on
+    // strict-KMP (no JVM-only target — see threadlocal-kotlin for the one
+    // documented exception). CodeQL Kotlin extraction is handled by the
+    // dedicated `codeqlCompileJvm` JavaExec task further down this file
+    // instead of a real jvm() target, because the K2 multiplatform pipeline
+    // for `compileKotlinJvm` bypasses the legacy K2JVMCompiler.doExecute
+    // path the CodeQL Java agent hooks.
+
     val xcf = XCFramework("TokioUtil")
 
+    // Apple desktop
     macosArm64 {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
+    // macosX64 was removed in Kotlin 2.3 — "Target is no longer available."
+
+    // iOS
     iosArm64 {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
@@ -95,11 +110,19 @@ kotlin {
         browser()
         nodejs()
     }
+
+    // Web — WasmJS
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         nodejs()
     }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi {
+        nodejs()
+    }
+
+    // Web — WasmWASI (experimental; nodejs runtime via wasi-preview1)
     @OptIn(ExperimentalWasmDsl::class)
     wasmWasi {
         nodejs()
@@ -135,6 +158,12 @@ kotlin {
     jvmToolchain(21)
 }
 
+// Show every test event in the CI log so runs are auditable.
+// Without this, gradle's default test-task output is just
+// `> Task :iosSimulatorArm64Test` with no per-test PASSED/FAILED,
+// which makes a green run indistinguishable from a no-op task. The
+// XML/HTML reports in build/test-results/ and build/reports/tests/ still
+// carry the canonical record, but those aren't visible in CI logs.
 tasks.withType<AbstractTestTask>().configureEach {
     testLogging {
         events(
@@ -248,8 +277,27 @@ mavenPublishing {
 // ---------------------------------------------------------------------------
 // CodeQL Java/Kotlin extraction task
 //
-// .github/workflows/codeql.yml invokes `./gradlew codeqlCompileJvm` to feed
-// kotlinc-compiled commonMain through the CodeQL Java agent.
+// The Kotlin Multiplatform build above runs on Kotlin 2.3.21. The K2 phased
+// compilation pipeline (`org.jetbrains.kotlin.cli.pipeline.JvmCliPipeline`)
+// is engaged whenever `-Xmulti-platform`/`-Xfragments=…` are in the kotlinc
+// args — that's KGP's standard multiplatform compileKotlinJvm shape. The
+// CodeQL Java agent (`codeql-java-agent.jar` v2.25.4) hooks
+// `K2JVMCompiler.doExecute(…)`, which the new pipeline bypasses, so an
+// agent-instrumented KMP compileKotlinJvm produces zero Kotlin TRAP.
+//
+// Fix: run a separate single-target JVM compile of commonMain sources via
+// JavaExec with NO multiplatform flags. Without `-Xmulti-platform` /
+// `-Xfragments=…` in the args, kotlinc 2.3.21 still dispatches through the
+// legacy `K2JVMCompiler.doExecute` path, the agent's class-load hook fires,
+// and per-source-file `*.kt.trap.gz` files get written.
+//
+// The agent is attached via `JAVA_TOOL_OPTIONS=-javaagent:codeql-java-agent.jar=java,kotlin`
+// (set by the CI step around this task), so the JavaExec subprocess loads it
+// at JVM startup independently of any LD_PRELOAD propagation chain.
+//
+// This task is for CodeQL extraction only. The output `.class` files are not
+// published and are not part of any KMP target.
+
 val codeqlKotlinc: Configuration by configurations.creating {
     description = "Kotlin compiler (CodeQL extraction target only — not published)"
     isCanBeResolved = true
@@ -274,7 +322,10 @@ dependencies {
 
 val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
     description =
-        "Compile commonMain Kotlin sources with kotlinc 2.3.21 for CodeQL Java/Kotlin extraction."
+        "Compile commonMain Kotlin sources with kotlinc 2.3.21 for CodeQL Java/Kotlin extraction." +
+        "Not part of any published artifact; intended to be wrapped by `codeql database create` " +
+        "or `github/codeql-action/init` so the LD_PRELOAD tracer can attach the extractor agent " +
+        "to the in-process kotlinc."
     group = "verification"
 
     classpath(codeqlKotlinc)
@@ -291,8 +342,16 @@ val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
     doFirst {
         outDir.get().asFile.mkdirs()
         val sourceFiles = sources.files.toMutableList()
+        // When commonMain has no Kotlin source (pre-port repos with only
+        // .gitkeep), kotlinc 2.3.21 invoked with zero source args drops to
+        // REPL mode and fails. Write a tiny placeholder under
+        // build/generated/codeql-empty-source/ so the task always runs and
+        // CodeQL always produces TRAP — a skipped task would be silent and
+        // indistinguishable from a successful extraction in CI logs.
         if (sourceFiles.isEmpty()) {
-            val sentinelFile = sentinelDir.get().asFile.resolve("io/github/kotlinmania/codeql/_CodeqlEmptySource.kt")
+            val sentinelFile = sentinelDir.get().asFile.resolve(
+                "io/github/kotlinmania/codeql/_CodeqlEmptySource.kt",
+            )
             sentinelFile.parentFile.mkdirs()
             sentinelFile.writeText(
                 """
@@ -302,6 +361,7 @@ val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
                 package io.github.kotlinmania.codeql
 
                 private object _CodeqlEmptySource
+
                 """.trimIndent(),
             )
             sourceFiles += sentinelFile
@@ -310,13 +370,13 @@ val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
             "-d", outDir.get().asFile.absolutePath,
             "-classpath", codeqlSourceClasspath.asPath,
             "-jvm-target", "21",
-            "-no-stdlib",
+            "-no-stdlib", // stdlib comes via the classpath
             "-no-reflect",
             "-language-version", "2.3",
             "-api-version", "2.3",
-            "-Xexpect-actual-classes",
             "-opt-in", "kotlin.time.ExperimentalTime",
             "-opt-in", "kotlin.concurrent.atomics.ExperimentalAtomicApi",
+            "-Xexpect-actual-classes",
         ) + sourceFiles.map { it.absolutePath }
     }
 }
