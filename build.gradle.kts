@@ -199,10 +199,18 @@ kotlin {
         binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
     }
     iosSimulatorArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosX64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
 
     tvosArm64 {
