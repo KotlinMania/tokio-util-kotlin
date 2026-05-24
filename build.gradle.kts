@@ -302,12 +302,6 @@ kotlin {
         nodejs()
     }
 
-    // Web — WasmWASI (experimental; nodejs runtime via wasi-preview1)
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmWasi {
-        nodejs()
-    }
-
     swiftExport {
         moduleName = "TokioUtil"
         flattenPackage = "io.github.kotlinmania.tokioutil"
