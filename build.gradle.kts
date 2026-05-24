@@ -545,6 +545,20 @@ tasks.matching { it.name == "embedSwiftExportForXcode" }.configureEach {
     }
 }
 
+// Swift Export code generation emits unchecked casts in the auto-generated
+// bridge files (e.g., TokioUtil.kt). Disable warnings-as-errors specifically
+// for Swift Export compilation tasks to prevent these warnings from blocking
+// the build while keeping strict warnings-as-errors for hand-written code.
+tasks.matching {
+    it.name.startsWith("compileSwiftExport") && it.name.contains("Kotlin")
+}.configureEach {
+    if (this is org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>) {
+        compilerOptions {
+            allWarningsAsErrors.set(false)
+        }
+    }
+}
+
 val fullTargetBuildTasks = listOf(
     "compileAndroidMain",
     "compileAndroidHostTest",
