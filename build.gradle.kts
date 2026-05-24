@@ -190,8 +190,20 @@ kotlin {
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
+    // ---- Maximal Kotlin 2.3.21 target coverage ----
+    //
+    // Every non-JVM Kotlin target the compiler supports is declared here.
+    // `jvm()` is intentionally omitted: this workspace standardizes on
+    // strict-KMP (no JVM-only target — see threadlocal-kotlin for the one
+    // documented exception). CodeQL Kotlin extraction is handled by the
+    // dedicated `codeqlCompileJvm` JavaExec task further down this file
+    // instead of a real jvm() target, because the K2 multiplatform pipeline
+    // for `compileKotlinJvm` bypasses the legacy K2JVMCompiler.doExecute
+    // path the CodeQL Java agent hooks.
+
     val xcf = XCFramework("TokioUtil")
 
+    // Apple desktop
     macosArm64 {
         binaries.framework {
             baseName = "TokioUtil"
@@ -278,11 +290,19 @@ kotlin {
         browser()
         nodejs()
     }
+
+    // Web — WasmJS
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
         nodejs()
     }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi {
+        nodejs()
+    }
+
+    // Web — WasmWASI (experimental; nodejs runtime via wasi-preview1)
     @OptIn(ExperimentalWasmDsl::class)
     wasmWasi {
         nodejs()
