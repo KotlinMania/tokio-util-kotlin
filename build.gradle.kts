@@ -193,10 +193,18 @@ kotlin {
     val xcf = XCFramework("TokioUtil")
 
     macosArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosSimulatorArm64 {
         binaries.framework {
@@ -214,23 +222,47 @@ kotlin {
     }
 
     tvosArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     tvosSimulatorArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
 
     watchosArm32 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     watchosArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     watchosDeviceArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     watchosSimulatorArm64 {
-        binaries.framework { baseName = "TokioUtil"; xcf.add(this) }
+        binaries.framework {
+            baseName = "TokioUtil"
+            isStatic = true
+            xcf.add(this)
+        }
     }
 
     linuxX64()
