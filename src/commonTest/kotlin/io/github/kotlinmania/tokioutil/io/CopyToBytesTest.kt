@@ -58,7 +58,8 @@ class CopyToBytesTest {
 
     private class RecordingStreamSink(
         private val items: MutableList<Any>,
-    ) : ByteSink, ByteStream {
+    ) : ByteSink,
+        ByteStream {
         override fun pollReady(): Result<Unit> = Result.success(Unit)
 
         override fun startSend(item: ByteArray): Result<Unit> = Result.success(Unit)
