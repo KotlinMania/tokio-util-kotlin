@@ -8,6 +8,7 @@ internal class Compat<T>(
     private val inner: T,
 ) {
     fun getRef(): T = inner
+
     fun intoInner(): T = inner
 
     companion object {

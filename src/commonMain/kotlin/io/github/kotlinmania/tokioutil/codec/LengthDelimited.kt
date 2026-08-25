@@ -9,10 +9,14 @@ import io.github.kotlinmania.tokioutil.bytes.BytesMut
  */
 class LengthDelimitedCodec(
     private var builder: Builder = Builder.new(),
-) : Decoder<BytesMut>, Encoder<ByteArray> {
+) : Decoder<BytesMut>,
+    Encoder<ByteArray> {
     private sealed class DecodeState {
         object Head : DecodeState()
-        class Data(val len: Int) : DecodeState()
+
+        class Data(
+            val len: Int,
+        ) : DecodeState()
     }
 
     private var state: DecodeState = DecodeState.Head
@@ -58,14 +62,15 @@ class LengthDelimitedCodec(
     }
 
     override fun decode(src: BytesMut): BytesMut? {
-        val n = when (val s = state) {
-            is DecodeState.Head -> {
-                val head = decodeHead(src) ?: return null
-                state = DecodeState.Data(head)
-                head
+        val n =
+            when (val s = state) {
+                is DecodeState.Head -> {
+                    val head = decodeHead(src) ?: return null
+                    state = DecodeState.Data(head)
+                    head
+                }
+                is DecodeState.Data -> s.len
             }
-            is DecodeState.Data -> s.len
-        }
 
         if (src.len() < n) {
             return null

@@ -2,12 +2,12 @@
 
 package io.github.kotlinmania.tokioutil.task
 
-import kotlin.concurrent.atomics.AtomicBoolean
-import kotlin.concurrent.atomics.AtomicInt
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlin.concurrent.atomics.AtomicBoolean
+import kotlin.concurrent.atomics.AtomicInt
 
 /**
  * A task tracker used for waiting until tasks exit.

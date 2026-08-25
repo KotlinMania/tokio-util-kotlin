@@ -1,5 +1,6 @@
 // port-lint: source task/join_map.rs
 @file:OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+
 package io.github.kotlinmania.tokioutil.task
 
 import kotlinx.coroutines.CompletableDeferred
@@ -51,11 +52,12 @@ internal class JoinMap<K, V> {
         for ((key, deferred) in tasks) {
             deferred.invokeOnCompletion { cause ->
                 if (cause == null) {
-                    val res = try {
-                        Result.success(deferred.getCompleted())
-                    } catch (e: Throwable) {
-                        Result.failure(e)
-                    }
+                    val res =
+                        try {
+                            Result.success(deferred.getCompleted())
+                        } catch (e: Throwable) {
+                            Result.failure(e)
+                        }
                     completer.complete(Pair(key, res))
                 } else {
                     completer.complete(Pair(key, Result.failure(cause)))

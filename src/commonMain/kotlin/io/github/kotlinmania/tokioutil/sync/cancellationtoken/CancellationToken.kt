@@ -74,14 +74,15 @@ class CancellationToken internal constructor(
             completer.complete(null)
         }
         return kotlinx.coroutines.coroutineScope {
-            val job = launch {
-                try {
-                    val res = block()
-                    completer.complete(res)
-                } catch (e: Throwable) {
-                    completer.completeExceptionally(e)
+            val job =
+                launch {
+                    try {
+                        val res = block()
+                        completer.complete(res)
+                    } catch (e: Throwable) {
+                        completer.completeExceptionally(e)
+                    }
                 }
-            }
             try {
                 completer.await()
             } finally {
@@ -100,4 +101,3 @@ class CancellationToken internal constructor(
         fun new(): CancellationToken = CancellationToken()
     }
 }
-

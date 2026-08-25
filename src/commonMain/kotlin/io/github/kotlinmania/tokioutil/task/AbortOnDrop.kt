@@ -13,9 +13,7 @@ internal class AbortOnDropHandle(
         job.cancel()
     }
 
-    fun isFinished(): Boolean {
-        return job.isCompleted
-    }
+    fun isFinished(): Boolean = job.isCompleted
 
     override fun close() {
         abort()

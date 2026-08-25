@@ -12,14 +12,15 @@ internal class ReaderStream(
     private val readFn: suspend (ByteArray) -> Int,
     val capacity: Int = DEFAULT_CAPACITY,
 ) {
-    internal fun toFlow(): Flow<Bytes> = flow {
-        val buf = ByteArray(capacity)
-        while (true) {
-            val read = readFn(buf)
-            if (read <= 0) break
-            emit(Bytes.copyFromSlice(buf, 0, read))
+    internal fun toFlow(): Flow<Bytes> =
+        flow {
+            val buf = ByteArray(capacity)
+            while (true) {
+                val read = readFn(buf)
+                if (read <= 0) break
+                emit(Bytes.copyFromSlice(buf, 0, read))
+            }
         }
-    }
 
     internal companion object {
         const val DEFAULT_CAPACITY: Int = 4096

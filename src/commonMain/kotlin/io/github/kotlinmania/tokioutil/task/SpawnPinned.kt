@@ -1,11 +1,11 @@
 // port-lint: source task/spawn_pinned.rs
 package io.github.kotlinmania.tokioutil.task
 
-import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlin.coroutines.CoroutineContext
 
 /**
  * A handle for spawning pinned asynchronous tasks.
@@ -18,9 +18,7 @@ internal class LocalPoolHandle(
 
     fun numThreads(): Int = poolSize
 
-    fun <T> spawnPinned(block: suspend CoroutineScope.() -> T): Deferred<T> {
-        return scope.async { block() }
-    }
+    fun <T> spawnPinned(block: suspend CoroutineScope.() -> T): Deferred<T> = scope.async { block() }
 
     companion object {
         fun new(poolSize: Int): LocalPoolHandle {
@@ -29,4 +27,3 @@ internal class LocalPoolHandle(
         }
     }
 }
-

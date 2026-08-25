@@ -7,14 +7,15 @@ import io.github.kotlinmania.tokioutil.bytes.BytesMut
 /**
  * A simple [Decoder] and [Encoder] implementation that ships raw bytes around.
  */
-class BytesCodec : Decoder<BytesMut>, Encoder<ByteArray> {
-    override fun decode(src: BytesMut): BytesMut? {
-        return if (src.isNotEmpty()) {
+class BytesCodec :
+    Decoder<BytesMut>,
+    Encoder<ByteArray> {
+    override fun decode(src: BytesMut): BytesMut? =
+        if (src.isNotEmpty()) {
             src.splitTo(src.len())
         } else {
             null
         }
-    }
 
     override fun encode(item: ByteArray, dst: BytesMut) {
         dst.put(item)

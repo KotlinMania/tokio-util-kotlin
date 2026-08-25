@@ -10,11 +10,11 @@ internal class FramedRead<T, D : Decoder<*>>(
     private val inner: FramedImpl<T, D, ReadFrame>,
 ) {
     constructor(inner: T, decoder: D) : this(
-        FramedImpl(inner, decoder, ReadFrame())
+        FramedImpl(inner, decoder, ReadFrame()),
     )
 
     constructor(inner: T, decoder: D, capacity: Int) : this(
-        FramedImpl(inner, decoder, ReadFrame(buffer = BytesMut.withCapacity(capacity)))
+        FramedImpl(inner, decoder, ReadFrame(buffer = BytesMut.withCapacity(capacity))),
     )
 
     fun getRef(): T = inner.inner

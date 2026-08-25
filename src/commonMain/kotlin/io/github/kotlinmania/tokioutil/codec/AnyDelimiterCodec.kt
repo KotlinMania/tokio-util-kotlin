@@ -11,7 +11,8 @@ class AnyDelimiterCodec(
     private val seekDelimiters: ByteArray = byteArrayOf(','.code.toByte(), ';'.code.toByte(), '\n'.code.toByte(), '\r'.code.toByte()),
     private val sequenceWriter: ByteArray = byteArrayOf(','.code.toByte()),
     private val maxLength: Int = Int.MAX_VALUE,
-) : Decoder<Bytes>, Encoder<String> {
+) : Decoder<Bytes>,
+    Encoder<String> {
     private var nextIndex: Int = 0
     private var isDiscarding: Boolean = false
 
@@ -19,10 +20,11 @@ class AnyDelimiterCodec(
 
     override fun decode(src: BytesMut): Bytes? {
         while (true) {
-            val readTo = minOf(
-                if (maxLength == Int.MAX_VALUE) Int.MAX_VALUE else maxLength + 1,
-                src.len()
-            )
+            val readTo =
+                minOf(
+                    if (maxLength == Int.MAX_VALUE) Int.MAX_VALUE else maxLength + 1,
+                    src.len(),
+                )
 
             var chunkOffset: Int? = null
             for (i in nextIndex until readTo) {

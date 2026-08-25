@@ -1,7 +1,6 @@
 // port-lint: tests codecs.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.Bytes
 import io.github.kotlinmania.tokioutil.bytes.BytesMut
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
@@ -59,9 +58,11 @@ class CodecTest {
 
     @Test
     fun testLengthDelimitedCodec() {
-        val codec = LengthDelimitedCodec.builder()
-            .lengthFieldLength(4)
-            .newCodec()
+        val codec =
+            LengthDelimitedCodec
+                .builder()
+                .lengthFieldLength(4)
+                .newCodec()
 
         val buf = BytesMut.new()
         val payload = byteArrayOf(10, 20, 30)
