@@ -44,6 +44,12 @@ val commonMainDependencyBundle =
         .named("libs")
         .findBundle(commonMainBundleName)
         .orElseThrow { GradleException("Missing libs bundle '$commonMainBundleName'") }
+val coroutinesTestDependency =
+    extensions
+        .getByType(VersionCatalogsExtension::class.java)
+        .named("libs")
+        .findLibrary("kotlinx-coroutines-test")
+        .get()
 
 // Opt-ins shared across Kotlin targets.
 val commonOptIns =
@@ -320,10 +326,6 @@ kotlin {
     swiftExport {
         moduleName = frameworkName
         flattenPackage = projectNamespace
-        @OptIn(org.jetbrains.kotlin.gradle.swiftexport.ExperimentalSwiftExportDsl::class)
-        configure {
-            settings.put("enableCoroutinesSupport", "true")
-        }
     }
 
     // Android KMP library. Block name is `android` — `androidLibrary` is deprecated in current KGP.
@@ -348,6 +350,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
+            implementation(coroutinesTestDependency)
         }
     }
 }
@@ -565,32 +568,15 @@ tasks.register("swiftExportSmokeTest") {
     group = "verification"
     description = "Builds the Swift Export SPM package and runs swift test against it."
     outputs.upToDateWhen { false }
-    mustRunAfter(
-        "macosArm64Test",
-        "jvmTest",
-        "jsNodeTest",
-        "wasmJsNodeTest",
-        "wasmWasiNodeTest",
-        "testAndroidHostTest",
-        "compileKotlinWasmWasi",
-        "compileKotlinWasmJs",
-    )
 
     doLast {
         val execOperations = serviceOf<ExecOperations>()
-        val swiftBuildFile =
+        val swiftBuildDir =
             layout.buildDirectory
                 .dir("swift-test")
                 .get()
                 .asFile
-        swiftBuildFile.deleteRecursively()
-        swiftBuildFile.mkdirs()
-        val swiftBuildDir = swiftBuildFile.absolutePath
-        layout.buildDirectory
-            .dir("bin/macosArm64/SwiftExportBinaryDebugStatic")
-            .get()
-            .asFile
-            .mkdirs()
+                .absolutePath
         execOperations
             .exec {
                 workingDir = projectDir
@@ -614,21 +600,6 @@ tasks.register("swiftExportSmokeTest") {
                     ),
                 )
             }.assertNormalExitValue()
-
-        val spmDir = layout.buildDirectory.dir("SPMPackage").orNull?.asFile
-        if (spmDir != null && spmDir.exists()) {
-            spmDir.walkTopDown().filter { it.name == "Package.swift" }.forEach { file ->
-                val text = file.readText()
-                if (!text.contains("platforms:")) {
-                    file.writeText(
-                        text.replaceFirst(
-                            Regex("""(let package = Package\s*\(\s*name:\s*"[^"]*",)"""),
-                            "$1\n    platforms: [.macOS(.v14)],",
-                        ),
-                    )
-                }
-            }
-        }
 
         execOperations
             .exec {
