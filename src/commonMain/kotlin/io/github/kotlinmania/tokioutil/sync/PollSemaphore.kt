@@ -2,7 +2,6 @@
 package io.github.kotlinmania.tokioutil.sync
 
 import kotlinx.coroutines.sync.Semaphore
-import kotlinx.coroutines.sync.withPermit
 
 /**
  * A wrapper around [Semaphore] that provides permit acquisition utilities.

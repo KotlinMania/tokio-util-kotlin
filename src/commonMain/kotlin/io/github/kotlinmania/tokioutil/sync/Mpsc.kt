@@ -7,7 +7,9 @@ import kotlinx.coroutines.channels.Channel
 /**
  * Error returned when the channel is closed.
  */
-internal class PollSendError(val item: Any? = null) : Exception("channel closed")
+internal class PollSendError(
+    val item: Any? = null,
+) : Exception("channel closed")
 
 /**
  * A wrapper around a multi-producer, single-consumer channel.

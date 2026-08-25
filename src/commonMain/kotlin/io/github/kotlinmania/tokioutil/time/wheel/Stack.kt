@@ -6,9 +6,13 @@ package io.github.kotlinmania.tokioutil.time.wheel
  */
 internal interface Stack<T> {
     fun isEmpty(): Boolean
+
     fun push(item: T)
+
     fun pop(): T?
+
     fun peek(): T?
+
     fun remove(item: T)
 }
 

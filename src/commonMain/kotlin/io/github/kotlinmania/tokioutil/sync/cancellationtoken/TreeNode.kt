@@ -3,10 +3,10 @@
 
 package io.github.kotlinmania.tokioutil.sync.cancellationtoken
 
+import kotlinx.coroutines.CompletableDeferred
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.AtomicInt
 import kotlin.concurrent.atomics.AtomicReference
-import kotlinx.coroutines.CompletableDeferred
 
 /**
  * A node of the cancellation tree structure.

@@ -7,6 +7,7 @@ internal class SyncIoBridge<T>(
     private val src: T,
 ) {
     fun intoInner(): T = src
+
     fun getRef(): T = src
 
     companion object {

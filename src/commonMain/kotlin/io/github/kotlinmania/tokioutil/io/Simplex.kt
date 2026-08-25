@@ -12,15 +12,16 @@ class SimplexReceiver internal constructor(
     private val buffer: BytesMut,
     private val mutex: Mutex,
 ) {
-    suspend fun read(dest: ByteArray, offset: Int, length: Int): Int = mutex.withLock {
-        val available = minOf(length, buffer.len())
-        if (available > 0) {
-            val chunk = buffer.splitTo(available)
-            val bytes = chunk.toByteArray()
-            bytes.copyInto(dest, offset, 0, available)
+    suspend fun read(dest: ByteArray, offset: Int, length: Int): Int =
+        mutex.withLock {
+            val available = minOf(length, buffer.len())
+            if (available > 0) {
+                val chunk = buffer.splitTo(available)
+                val bytes = chunk.toByteArray()
+                bytes.copyInto(dest, offset, 0, available)
+            }
+            available
         }
-        available
-    }
 }
 
 /**
@@ -30,10 +31,11 @@ class SimplexSender internal constructor(
     private val buffer: BytesMut,
     private val mutex: Mutex,
 ) {
-    suspend fun write(src: ByteArray, offset: Int, length: Int): Int = mutex.withLock {
-        buffer.put(src, offset, length)
-        length
-    }
+    suspend fun write(src: ByteArray, offset: Int, length: Int): Int =
+        mutex.withLock {
+            buffer.put(src, offset, length)
+            length
+        }
 }
 
 /**

@@ -21,6 +21,7 @@ internal class UdpFramed<C, T>(
     private val wr: BytesMut = BytesMut.withCapacity(INITIAL_WR_CAPACITY),
 ) {
     fun readBuffer(): BytesMut = rd
+
     fun writeBuffer(): BytesMut = wr
 
     companion object {

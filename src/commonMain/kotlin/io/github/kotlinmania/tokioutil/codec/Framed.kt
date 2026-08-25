@@ -11,7 +11,7 @@ internal class Framed<T, U>(
     private val inner: FramedImpl<T, U, RWFrames>,
 ) {
     constructor(inner: T, codec: U) : this(
-        FramedImpl(inner, codec, RWFrames())
+        FramedImpl(inner, codec, RWFrames()),
     )
 
     constructor(inner: T, codec: U, capacity: Int) : this(
@@ -21,8 +21,8 @@ internal class Framed<T, U>(
             RWFrames(
                 read = ReadFrame(buffer = BytesMut.withCapacity(capacity)),
                 write = WriteFrame(buffer = BytesMut.withCapacity(capacity), backpressureBoundary = capacity),
-            )
-        )
+            ),
+        ),
     )
 
     fun getRef(): T = inner.inner

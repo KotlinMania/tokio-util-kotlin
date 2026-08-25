@@ -1,8 +1,6 @@
 // port-lint: source io/sink_writer.rs
 package io.github.kotlinmania.tokioutil.io
 
-import io.github.kotlinmania.tokioutil.bytes.Bytes
-
 /**
  * An adapter for writing byte chunks to an underlying consumer.
  */
@@ -10,6 +8,7 @@ internal class SinkWriter<S>(
     private val inner: S,
 ) {
     fun getRef(): S = inner
+
     fun intoInner(): S = inner
 
     internal companion object {

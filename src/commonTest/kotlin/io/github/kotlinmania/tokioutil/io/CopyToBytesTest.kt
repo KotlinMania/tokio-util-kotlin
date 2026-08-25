@@ -2,7 +2,6 @@
 package io.github.kotlinmania.tokioutil.io
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertSame
 
 class CopyToBytesTest {

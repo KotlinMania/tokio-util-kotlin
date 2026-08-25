@@ -10,11 +10,11 @@ internal class FramedWrite<T, E : Encoder<*>>(
     private val inner: FramedImpl<T, E, WriteFrame>,
 ) {
     constructor(inner: T, encoder: E) : this(
-        FramedImpl(inner, encoder, WriteFrame())
+        FramedImpl(inner, encoder, WriteFrame()),
     )
 
     constructor(inner: T, encoder: E, capacity: Int) : this(
-        FramedImpl(inner, encoder, WriteFrame(buffer = BytesMut.withCapacity(capacity), backpressureBoundary = capacity))
+        FramedImpl(inner, encoder, WriteFrame(buffer = BytesMut.withCapacity(capacity), backpressureBoundary = capacity)),
     )
 
     fun getRef(): T = inner.inner

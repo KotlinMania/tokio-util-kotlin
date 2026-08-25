@@ -8,7 +8,9 @@ import kotlin.time.TimeSource
 /**
  * A key representing an entry in a [DelayQueue].
  */
-data class Key(val id: Long)
+data class Key(
+    val id: Long,
+)
 
 /**
  * An expired entry from a [DelayQueue].
@@ -44,9 +46,7 @@ internal class DelayQueue<T> {
         return key
     }
 
-    fun remove(key: Key): T? {
-        return entries.remove(key)?.value
-    }
+    fun remove(key: Key): T? = entries.remove(key)?.value
 
     fun reset(key: Key, delay: Duration) {
         val entry = entries[key] ?: return

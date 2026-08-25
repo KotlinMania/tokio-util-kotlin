@@ -8,7 +8,9 @@ internal class CopyToBytes<S>(
     private val inner: S,
 ) {
     fun getRef(): S = inner
+
     fun getMut(): S = inner
+
     fun intoInner(): S = inner
 
     companion object {

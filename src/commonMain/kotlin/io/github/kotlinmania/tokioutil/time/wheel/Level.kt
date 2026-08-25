@@ -37,9 +37,7 @@ internal class Level<T>(
 
     fun peekEntrySlot(slot: Int): T? = slots[slot].peek()
 
-    private fun slotFor(whenMs: Long): Int {
-        return ((whenMs ushr (level * 6)) and 63L).toInt()
-    }
+    private fun slotFor(whenMs: Long): Int = ((whenMs ushr (level * 6)) and 63L).toInt()
 
     companion object {
         const val LEVEL_MULT: Int = 64

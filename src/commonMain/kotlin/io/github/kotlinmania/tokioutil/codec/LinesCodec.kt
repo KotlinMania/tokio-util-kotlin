@@ -8,7 +8,8 @@ import io.github.kotlinmania.tokioutil.bytes.BytesMut
  */
 class LinesCodec(
     private val maxLength: Int = Int.MAX_VALUE,
-) : Decoder<String>, Encoder<String> {
+) : Decoder<String>,
+    Encoder<String> {
     private var nextIndex: Int = 0
     private var isDiscarding: Boolean = false
 
@@ -16,10 +17,11 @@ class LinesCodec(
 
     override fun decode(src: BytesMut): String? {
         while (true) {
-            val readTo = minOf(
-                if (maxLength == Int.MAX_VALUE) Int.MAX_VALUE else maxLength + 1,
-                src.len()
-            )
+            val readTo =
+                minOf(
+                    if (maxLength == Int.MAX_VALUE) Int.MAX_VALUE else maxLength + 1,
+                    src.len(),
+                )
 
             var newlineOffset: Int? = null
             for (i in nextIndex until readTo) {
