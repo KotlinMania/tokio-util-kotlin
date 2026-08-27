@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/sync/cancellation_token/tree_node.rs
+// port-lint: source sync/cancellation_token/tree_node.rs
 @file:OptIn(kotlin.concurrent.atomics.ExperimentalAtomicApi::class)
 
 package io.github.kotlinmania.tokioutil.sync.cancellationtoken

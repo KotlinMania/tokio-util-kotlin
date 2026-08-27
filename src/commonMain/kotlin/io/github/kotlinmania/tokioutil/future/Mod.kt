@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/tests/future.rs
+// port-lint: source future.rs
 package io.github.kotlinmania.tokioutil.future
 
 /**

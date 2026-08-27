@@ -1,4 +1,4 @@
-// port-lint: tests tokio-util/tests/time_delay_queue.rs
+// port-lint: tests time_delay_queue.rs
 package io.github.kotlinmania.tokioutil.time
 
 import kotlin.test.Test
