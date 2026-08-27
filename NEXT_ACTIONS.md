@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 49/58 (84.5%)
-- **Function parity:** 141/558 matched (target 193) — 25.3%
-- **Class/type parity:** 30/127 matched (target 64) — 23.6%
-- **Combined symbol parity:** 171/685 matched (target 257) — 25.0%
-- **Average inline-code cosine:** 0.28 (function body across 41 matched files)
-- **Average documentation cosine:** 0.29 (doc text across 41 matched files)
-- **Cheat-zeroed Files:** 11
-- **Critical Issues:** 45 files with <0.60 function similarity
+- **Files Present:** 58/58 (100.0%)
+- **Function parity:** 164/531 matched (target 229) — 30.9%
+- **Class/type parity:** 39/127 matched (target 80) — 30.7%
+- **Combined symbol parity:** 203/658 matched (target 309) — 30.9%
+- **Average inline-code cosine:** 0.25 (function body across 46 matched files)
+- **Average documentation cosine:** 0.29 (doc text across 46 matched files)
+- **Cheat-zeroed Files:** 16
+- **Critical Issues:** 54 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -94,7 +94,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Output`, `SetOnDrop`
 - **Tests:** 0/1 matched
 
-### 7. either
+### 7. time.delay_queue
+
+- **Target:** `time.DelayQueue`
+- **Similarity:** 0.05
+- **Dependents:** 1
+- **Priority Score:** 1425109.5
+- **Functions:** 6/39 matched (target 8)
+- **Missing functions:** `with_capacity`, `shrink_to_fit`, `compact`, `remap_key`, `create_new_key`, `capacity`, `clear`, `reserve`, `contains`, `fmt`, `index`, `index_mut`, `insert_at`, `poll_expired`, `insert_idx`, `deadline`, `remove_key`, `try_remove`, `reset_at`, `peek`, `next_deadline`, `poll_idx`, `normalize_deadline`, `default`, `poll_next`, `push`, `pop`, `when`, `from`, `get_ref`, `get_mut`, `into_inner`, `key`
+- **Types:** 3/12 matched (target 4)
+- **Missing types:** `SlabStorage`, `Output`, `KeyInternal`, `Stack`, `Data`, `Item`, `Owned`, `Borrowed`, `Store`
+
+### 8. either
 
 - **Target:** `tokioutil.Either`
 - **Similarity:** 0.00
@@ -105,7 +116,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/4 matched
 - **Missing types:** `Output`, `Item`, `Error`
 
-### 8. io.stream_reader
+### 9. io.stream_reader
 
 - **Target:** `io.StreamReader`
 - **Similarity:** 0.02
@@ -117,7 +128,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `StreamReaderProject`, `Error`
 - **Lint issues:** 3
 
-### 9. codec.framed
+### 10. codec.framed
 
 - **Target:** `codec.Framed`
 - **Similarity:** 0.44
@@ -128,7 +139,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/3 matched (target 1)
 - **Missing types:** `Item`, `Error`, `FramedParts`
 
-### 10. codec.framed_write
+### 11. codec.framed_write
 
 - **Target:** `codec.FramedWrite`
 - **Similarity:** 0.44
@@ -139,7 +150,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched (target 1)
 - **Missing types:** `Error`, `Item`
 
-### 11. codec.framed_read
+### 12. codec.framed_read
 
 - **Target:** `codec.FramedRead`
 - **Similarity:** 0.38
@@ -150,7 +161,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched (target 1)
 - **Missing types:** `Item`, `Error`
 
-### 12. sync.poll_semaphore
+### 13. sync.poll_semaphore
 
 - **Target:** `sync.PollSemaphore`
 - **Similarity:** 0.12
@@ -161,7 +172,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `Item`
 
-### 13. wheel.level
+### 14. wheel.level
 
 - **Target:** `wheel.Level`
 - **Similarity:** 0.27
@@ -173,7 +184,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 0/1 matched
 
-### 14. io.copy_to_bytes
+### 15. io.copy_to_bytes
 
 - **Target:** `io.CopyToBytes`
 - **Similarity:** 0.41
@@ -184,7 +195,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched
 - **Missing types:** `Error`, `Item`
 
-### 15. io.sink_writer
+### 16. io.sink_writer
 
 - **Target:** `io.SinkWriter`
 - **Similarity:** 0.27
@@ -195,7 +206,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/1 matched
 - **Missing types:** `Item`
 
-### 16. io.read_buf
+### 17. io.read_buf
 
 - **Target:** `io.ReadBuf`
 - **Similarity:** 0.15
@@ -206,7 +217,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched (target 0)
 - **Missing types:** `ReadBufFn`, `Output`
 
-### 17. codec.bytes_codec
+### 18. codec.bytes_codec
 
 - **Target:** `codec.BytesCodec`
 - **Similarity:** 0.44
@@ -217,7 +228,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 1)
 - **Missing types:** `Item`, `Error`
 
-### 18. io.reader_stream
+### 19. io.reader_stream
 
 - **Target:** `io.ReaderStream`
 - **Similarity:** 0.29
@@ -228,7 +239,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/1 matched
 - **Missing types:** `Item`
 
-### 19. task.join_map
+### 20. task.join_map
 
 - **Target:** `task.JoinMap`
 - **Similarity:** 0.11
@@ -239,7 +250,21 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/4 matched (target 1)
 - **Missing types:** `KeySet`, `JoinMapKeys`, `Item`
 
-### 20. task.join_queue
+### 21. task.task_tracker
+
+- **Target:** `task.TaskTracker [PROVENANCE-FALLBACK]`
+- **Similarity:** 0.10
+- **Dependents:** 0
+- **Priority Score:** 223409.0
+- **Functions:** 10/29 matched (target 14)
+- **Missing functions:** `is_closed_and_empty`, `set_closed`, `set_open`, `add_task`, `notify_now`, `spawn_on`, `spawn_local`, `spawn_local_on`, `spawn_blocking`, `spawn_blocking_on`, `track_future`, `ptr_eq`, `default`, `clone`, `debug_inner`, `fmt`, `task_tracker`, `drop`, `poll`
+- **Types:** 2/5 matched (target 3)
+- **Missing types:** `TaskTrackerInner`, `Output`, `Helper`
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:task_tracker.rs` vs expected `task/task_tracker.rs`
+- **Proposed provenance header:** `// port-lint: tests task/task_tracker.rs` (current: `// port-lint: tests task_tracker.rs`)
+- **Lint issues:** 1
+
+### 22. task.join_queue
 
 - **Target:** `task.JoinQueue`
 - **Similarity:** 0.06
@@ -251,7 +276,21 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `NotDebug`
 - **Tests:** 0/2 matched
 
-### 21. io.simplex
+### 23. sync.mpsc
+
+- **Target:** `sync.Mpsc [PROVENANCE-FALLBACK]`
+- **Similarity:** 0.03
+- **Dependents:** 0
+- **Priority Score:** 202509.7
+- **Functions:** 3/19 matched (target 8)
+- **Missing functions:** `into_inner`, `fmt`, `make_acquire_future`, `empty`, `poll`, `set`, `take_state`, `poll_reserve`, `send_item`, `get_ref`, `abort_send`, `clone`, `poll_ready`, `poll_flush`, `start_send`, `poll_close`
+- **Types:** 2/6 matched (target 3)
+- **Missing types:** `State`, `InnerFuture`, `PollSenderFuture`, `Error`
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:mpsc.rs` vs expected `sync/mpsc.rs`
+- **Proposed provenance header:** `// port-lint: tests sync/mpsc.rs` (current: `// port-lint: tests mpsc.rs`)
+- **Lint issues:** 1
+
+### 24. io.simplex
 
 - **Target:** `io.Simplex`
 - **Similarity:** 0.00
@@ -262,7 +301,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/4 matched (target 2)
 - **Missing types:** `IoResult`, `Inner`, `Receiver`, `Sender`
 
-### 22. compat
+### 25. compat
 
 - **Target:** `tokioutil.Compat`
 - **Similarity:** 0.11
@@ -273,7 +312,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/4 matched (target 1)
 - **Missing types:** `FuturesAsyncReadCompatExt`, `FuturesAsyncWriteCompatExt`, `TokioAsyncReadCompatExt`, `TokioAsyncWriteCompatExt`
 
-### 23. task.spawn_pinned
+### 26. io.sync_bridge
+
+- **Target:** `io.SyncBridge`
+- **Similarity:** 0.08
+- **Dependents:** 0
+- **Priority Score:** 182109.2
+- **Functions:** 2/20 matched (target 3)
+- **Missing functions:** `fill_buf`, `consume`, `read_until`, `read_line`, `read`, `read_to_end`, `read_to_string`, `read_exact`, `write`, `flush`, `write_all`, `write_vectored`, `seek`, `is_write_vectored`, `shutdown`, `new_with_handle`, `as_mut`, `as_ref`
+- **Types:** 1/1 matched
+- **Missing types:** _none_
+
+### 27. task.spawn_pinned
 
 - **Target:** `task.SpawnPinned`
 - **Similarity:** 0.09
@@ -284,7 +334,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/7 matched (target 1)
 - **Missing types:** `WorkerChoice`, `LocalPool`, `JobCountGuard`, `AbortGuard`, `PinnedFutureSpawner`, `LocalWorkerHandle`
 
-### 24. codec.length_delimited
+### 28. codec.length_delimited
 
 - **Target:** `codec.LengthDelimited`
 - **Similarity:** 0.37
@@ -295,7 +345,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/7 matched (target 5)
 - **Missing types:** `LengthDelimitedCodecError`, `Item`, `Error`, `LengthFieldType`
 
-### 25. udp.frame
+### 29. udp.frame
 
 - **Target:** `udp.Frame`
 - **Similarity:** 0.11
@@ -306,7 +356,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 2)
 - **Missing types:** `Item`, `Error`
 
-### 26. wheel.mod
+### 30. wheel.mod
 
 - **Target:** `wheel.Mod [STUB]`
 - **Similarity:** 0.00
@@ -318,7 +368,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `InsertError`
 - **Tests:** 0/1 matched
 
-### 27. codec.framed_impl
+### 31. codec.framed_impl
 
 - **Target:** `codec.FramedImpl [ZERO]`
 - **Similarity:** 0.00
@@ -329,7 +379,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/5 matched (target 4)
 - **Missing types:** `Item`, `Error`
 
-### 28. task.abort_on_drop
+### 32. task.abort_on_drop
 
 - **Target:** `task.AbortOnDrop`
 - **Similarity:** 0.07
@@ -341,7 +391,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Output`, `NotDebug`
 - **Tests:** 0/2 matched
 
-### 29. sync.reusable_box
+### 33. sync.reusable_box
 
 - **Target:** `sync.ReusableBox`
 - **Similarity:** 0.10
@@ -352,7 +402,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 1)
 - **Missing types:** `Output`, `CallOnDrop`
 
-### 30. codec.lines_codec
+### 34. codec.lines_codec
 
 - **Target:** `codec.LinesCodec`
 - **Similarity:** 0.34
@@ -363,7 +413,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/4 matched (target 1)
 - **Missing types:** `Item`, `Error`, `LinesCodecError`
 
-### 31. io.inspect
+### 35. io.inspect
 
 - **Target:** `io.Inspect`
 - **Similarity:** 0.09
@@ -374,7 +424,19 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
 
-### 32. cancellation_token.tree_node
+### 36. tests.loom_cancellation_token
+
+- **Target:** `tests.LoomCancellationToken [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 70710.0
+- **Functions:** 0/7 matched (target 0)
+- **Missing functions:** `cancel_token`, `cancel_token_owned`, `cancel_with_child`, `drop_token_no_child`, `drop_token_with_children`, `drop_and_cancel_token`, `cancel_parent_and_child`
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+- **Tests:** 0/7 matched
+
+### 37. cancellation_token.tree_node
 
 - **Target:** `cancellationtoken.TreeNode`
 - **Similarity:** 0.22
@@ -385,7 +447,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `Inner`
 
-### 33. codec.any_delimiter_codec
+### 38. codec.any_delimiter_codec
 
 - **Target:** `codec.AnyDelimiterCodec`
 - **Similarity:** 0.47
@@ -396,7 +458,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/4 matched (target 1)
 - **Missing types:** `Item`, `Error`, `AnyDelimiterCodecError`
 
-### 34. context
+### 39. net.mod
+
+- **Target:** `net.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 60910.0
+- **Functions:** 2/4 matched (target 2)
+- **Missing functions:** `poll_accept`, `poll`
+- **Types:** 1/5 matched (target 1)
+- **Missing types:** `Io`, `Addr`, `ListenerAcceptFut`, `Output`
+
+### 40. context
 
 - **Target:** `tokioutil.Context`
 - **Similarity:** 0.06
@@ -407,7 +480,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched (target 1)
 - **Missing types:** `Output`, `RuntimeExt`
 
-### 35. future.with_cancellation_token
+### 41. unix.mod
+
+- **Target:** `unix.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 40410.0
+- **Functions:** 0/2 matched (target 0)
+- **Missing functions:** `poll_accept`, `local_addr`
+- **Types:** 0/2 matched (target 1)
+- **Missing types:** `Io`, `Addr`
+
+### 42. future.with_cancellation_token
 
 - **Target:** `future.WithCancellationToken`
 - **Similarity:** 0.34
@@ -418,7 +502,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/1 matched (target 2)
 - **Missing types:** `Output`
 
-### 36. time.mod
+### 43. time.mod
 
 - **Target:** `time.Mod [STUB]`
 - **Similarity:** 0.00
@@ -429,18 +513,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/1 matched
 - **Missing types:** `Round`
 
-### 37. cancellation_token.guard
-
-- **Target:** `cancellationtoken.Guard`
-- **Similarity:** 0.32
-- **Dependents:** 0
-- **Priority Score:** 10306.8
-- **Functions:** 1/2 matched (target 3)
-- **Missing functions:** `drop`
-- **Types:** 1/1 matched
-- **Missing types:** _none_
-
-### 38. cancellation_token.guard_ref
+### 44. cancellation_token.guard_ref
 
 - **Target:** `cancellationtoken.GuardRef`
 - **Similarity:** 0.32
@@ -451,7 +524,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched
 - **Missing types:** _none_
 
-### 39. io.read_arc
+### 45. cancellation_token.guard
+
+- **Target:** `cancellationtoken.Guard`
+- **Similarity:** 0.32
+- **Dependents:** 0
+- **Priority Score:** 10306.8
+- **Functions:** 1/2 matched (target 3)
+- **Missing functions:** `drop`
+- **Types:** 1/1 matched
+- **Missing types:** _none_
+
+### 46. io.read_arc
 
 - **Target:** `io.ReadArc`
 - **Similarity:** 0.00
@@ -462,7 +546,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 40. util.poll_buf
+### 47. util.poll_buf
 
 - **Target:** `util.PollBuf`
 - **Similarity:** 0.42
@@ -473,20 +557,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 41. loom
+### 48. tests.mod
 
-- **Target:** `tokioutil.Loom [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 1)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 42. codec.mod
-
-- **Target:** `codec.Mod [STUB]`
+- **Target:** `tests.Mod [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -495,40 +568,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 43. sync.mod
-
-- **Target:** `sync.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 44. util.mod
-
-- **Target:** `util.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 45. task.mod
-
-- **Target:** `task.Mod [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 46. udp.mod
+### 49. udp.mod
 
 - **Target:** `udp.Mod [STUB]`
 - **Similarity:** 0.00
@@ -539,7 +579,62 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 47. io.mod
+### 50. tracing
+
+- **Target:** `tokioutil.Tracing [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 1)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 51. task.mod
+
+- **Target:** `task.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 52. util.mod
+
+- **Target:** `util.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 53. sync.mod
+
+- **Target:** `sync.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 54. codec.mod
+
+- **Target:** `codec.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 55. io.mod
 
 - **Target:** `io.Mod [STUB]`
 - **Similarity:** 0.00
@@ -550,7 +645,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 48. cfg
+### 56. loom
+
+- **Target:** `tokioutil.Loom [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 1)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 57. cfg
 
 - **Target:** `tokioutil.Cfg`
 - **Similarity:** 1.00
@@ -561,7 +667,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 49. lib
+### 58. lib
 
 - **Target:** `tokioutil.Lib`
 - **Similarity:** 1.00
