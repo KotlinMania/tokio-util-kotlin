@@ -4,7 +4,7 @@ package io.github.kotlinmania.tokioutil
 /**
  * Combines two different types into a single type.
  */
-internal sealed class Either<out L, out R> {
+sealed class Either<out L, out R> {
     data class Left<out L>(
         val value: L,
     ) : Either<L, Nothing>()

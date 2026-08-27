@@ -1,3 +1,4 @@
+// port-lint: source sync/mpsc.rs
 @file:OptIn(kotlinx.coroutines.DelicateCoroutinesApi::class)
 
 package io.github.kotlinmania.tokioutil.sync
