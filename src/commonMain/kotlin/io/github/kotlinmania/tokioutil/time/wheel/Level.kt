@@ -1,4 +1,4 @@
-// port-lint: source time/wheel/level.rs
+// port-lint: source tokio-util/src/time/wheel/level.rs
 package io.github.kotlinmania.tokioutil.time.wheel
 
 internal data class Expiration(

@@ -1,4 +1,4 @@
-// port-lint: source udp/frame.rs
+// port-lint: source tokio-util/src/udp/frame.rs
 package io.github.kotlinmania.tokioutil.udp
 
 import io.github.kotlinmania.tokioutil.bytes.BytesMut
