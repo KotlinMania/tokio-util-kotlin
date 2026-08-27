@@ -1,4 +1,4 @@
-// port-lint: tests tokio-util/tests/codecs.rs
+// port-lint: tests codecs.rs
 package io.github.kotlinmania.tokioutil.codec
 
 import io.github.kotlinmania.tokioutil.bytes.BytesMut

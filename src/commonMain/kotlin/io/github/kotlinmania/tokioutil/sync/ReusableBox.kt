@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/sync/reusable_box.rs
+// port-lint: source sync/reusable_box.rs
 package io.github.kotlinmania.tokioutil.sync
 
 /**

@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/io/sink_writer.rs
+// port-lint: source io/sink_writer.rs
 package io.github.kotlinmania.tokioutil.io
 
 /**

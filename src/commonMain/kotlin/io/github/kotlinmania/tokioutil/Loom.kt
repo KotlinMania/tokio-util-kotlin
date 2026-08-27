@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/loom.rs
+// port-lint: source loom.rs
 package io.github.kotlinmania.tokioutil
 
 import kotlinx.coroutines.sync.Mutex

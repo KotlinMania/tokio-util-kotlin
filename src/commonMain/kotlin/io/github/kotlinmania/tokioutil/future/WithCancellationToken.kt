@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/future/with_cancellation_token.rs
+// port-lint: source future/with_cancellation_token.rs
 package io.github.kotlinmania.tokioutil.future
 
 import io.github.kotlinmania.tokioutil.sync.cancellationtoken.CancellationToken

@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/codec/any_delimiter_codec.rs
+// port-lint: source codec/any_delimiter_codec.rs
 package io.github.kotlinmania.tokioutil.codec
 
 import io.github.kotlinmania.tokioutil.bytes.Bytes
