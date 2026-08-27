@@ -1,4 +1,4 @@
-// port-lint: source either.rs
+// port-lint: source tokio-util/src/either.rs
 package io.github.kotlinmania.tokioutil
 
 /**

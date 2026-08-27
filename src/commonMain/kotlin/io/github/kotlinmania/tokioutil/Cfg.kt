@@ -1,4 +1,4 @@
-// port-lint: source cfg.rs
+// port-lint: source tokio-util/src/cfg.rs
 package io.github.kotlinmania.tokioutil
 
 /**

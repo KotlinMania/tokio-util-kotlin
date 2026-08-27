@@ -1,4 +1,4 @@
-// port-lint: source io/inspect.rs
+// port-lint: source tokio-util/src/io/inspect.rs
 package io.github.kotlinmania.tokioutil.io
 
 /**

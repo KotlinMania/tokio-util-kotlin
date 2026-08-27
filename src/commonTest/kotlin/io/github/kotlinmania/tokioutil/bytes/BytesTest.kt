@@ -1,4 +1,4 @@
-// port-lint: tests bytes.rs
+// port-lint: tests tokio-util/src/bytes.rs
 package io.github.kotlinmania.tokioutil.bytes
 
 import kotlin.test.Test
