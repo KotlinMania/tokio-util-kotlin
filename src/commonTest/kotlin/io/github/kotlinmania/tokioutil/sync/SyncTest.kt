@@ -1,4 +1,4 @@
-// port-lint: tests mpsc.rs
+// port-lint: tests sync/mpsc.rs
 package io.github.kotlinmania.tokioutil.sync
 
 import kotlin.test.Test

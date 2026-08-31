@@ -252,7 +252,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 21. task.task_tracker
 
-- **Target:** `task.TaskTracker [PROVENANCE-FALLBACK]`
+- **Target:** `task.TaskTracker`
 - **Similarity:** 0.10
 - **Dependents:** 0
 - **Priority Score:** 223409.0
@@ -260,9 +260,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `is_closed_and_empty`, `set_closed`, `set_open`, `add_task`, `notify_now`, `spawn_on`, `spawn_local`, `spawn_local_on`, `spawn_blocking`, `spawn_blocking_on`, `track_future`, `ptr_eq`, `default`, `clone`, `debug_inner`, `fmt`, `task_tracker`, `drop`, `poll`
 - **Types:** 2/5 matched (target 3)
 - **Missing types:** `TaskTrackerInner`, `Output`, `Helper`
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:task_tracker.rs` vs expected `task/task_tracker.rs`
-- **Proposed provenance header:** `// port-lint: tests task/task_tracker.rs` (current: `// port-lint: tests task_tracker.rs`)
-- **Lint issues:** 1
 
 ### 22. task.join_queue
 
@@ -278,7 +275,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 23. sync.mpsc
 
-- **Target:** `sync.Mpsc [PROVENANCE-FALLBACK]`
+- **Target:** `sync.Mpsc`
 - **Similarity:** 0.03
 - **Dependents:** 0
 - **Priority Score:** 202509.7
@@ -286,9 +283,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `into_inner`, `fmt`, `make_acquire_future`, `empty`, `poll`, `set`, `take_state`, `poll_reserve`, `send_item`, `get_ref`, `abort_send`, `clone`, `poll_ready`, `poll_flush`, `start_send`, `poll_close`
 - **Types:** 2/6 matched (target 3)
 - **Missing types:** `State`, `InnerFuture`, `PollSenderFuture`, `Error`
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:mpsc.rs` vs expected `sync/mpsc.rs`
-- **Proposed provenance header:** `// port-lint: tests sync/mpsc.rs` (current: `// port-lint: tests mpsc.rs`)
-- **Lint issues:** 1
 
 ### 24. io.simplex
 
