@@ -1,4 +1,4 @@
-// port-lint: source sync/poll_semaphore.rs
+// port-lint: source tokio-util/src/sync/poll_semaphore.rs
 package io.github.kotlinmania.tokioutil.sync
 
 import kotlinx.coroutines.sync.Semaphore

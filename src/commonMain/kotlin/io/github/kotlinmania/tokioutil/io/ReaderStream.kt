@@ -1,4 +1,4 @@
-// port-lint: source io/reader_stream.rs
+// port-lint: source tokio-util/src/io/reader_stream.rs
 package io.github.kotlinmania.tokioutil.io
 
 import io.github.kotlinmania.tokioutil.bytes.Bytes

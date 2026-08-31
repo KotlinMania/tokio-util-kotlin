@@ -1,4 +1,4 @@
-// port-lint: source io/read_buf.rs
+// port-lint: source tokio-util/src/io/read_buf.rs
 package io.github.kotlinmania.tokioutil.io
 
 import io.github.kotlinmania.tokioutil.bytes.BytesMut

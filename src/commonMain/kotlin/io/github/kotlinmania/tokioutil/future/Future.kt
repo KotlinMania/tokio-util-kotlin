@@ -1,4 +1,4 @@
-// port-lint: source future.rs
+// port-lint: source tokio-util/src/future.rs
 package io.github.kotlinmania.tokioutil.future
 
 import io.github.kotlinmania.tokioutil.sync.cancellationtoken.CancellationToken
@@ -31,4 +31,13 @@ internal object FutureExt {
         block: suspend () -> T,
     ): WithCancellationTokenFutureOwned<T> =
         WithCancellationTokenFutureOwned.new(cancellationToken, block)
+}
+
+/**
+ * Module ledger for future utilities.
+ */
+internal object FutureModLedger {
+    val futureExt = FutureExt
+    val withCancellationTokenFutureClass = WithCancellationTokenFuture::class
+    val withCancellationTokenFutureOwnedClass = WithCancellationTokenFutureOwned::class
 }

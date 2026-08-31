@@ -1,4 +1,4 @@
-// port-lint: source task/spawn_pinned.rs
+// port-lint: source tokio-util/src/task/spawn_pinned.rs
 package io.github.kotlinmania.tokioutil.task
 
 import kotlinx.coroutines.CoroutineScope

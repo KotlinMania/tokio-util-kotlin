@@ -1,4 +1,4 @@
-// port-lint: source time/delay_queue.rs
+// port-lint: source tokio-util/src/time/delay_queue.rs
 package io.github.kotlinmania.tokioutil.time
 
 import kotlinx.coroutines.delay

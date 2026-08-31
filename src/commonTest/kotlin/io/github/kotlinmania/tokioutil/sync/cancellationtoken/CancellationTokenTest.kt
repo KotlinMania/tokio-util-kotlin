@@ -1,4 +1,4 @@
-// port-lint: tests sync_cancellation_token.rs
+// port-lint: tests tokio-util/tests/sync_cancellation_token.rs
 package io.github.kotlinmania.tokioutil.sync.cancellationtoken
 
 import kotlin.test.Test

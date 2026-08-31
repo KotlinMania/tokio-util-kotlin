@@ -1,4 +1,4 @@
-// port-lint: source sync/tests/loom_cancellation_token.rs
+// port-lint: source tokio-util/src/sync/tests/loom_cancellation_token.rs
 package io.github.kotlinmania.tokioutil.sync.tests
 
 /**

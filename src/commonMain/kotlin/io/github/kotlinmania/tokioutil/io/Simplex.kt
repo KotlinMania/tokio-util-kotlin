@@ -1,4 +1,4 @@
-// port-lint: source io/simplex.rs
+// port-lint: source tokio-util/src/io/simplex.rs
 package io.github.kotlinmania.tokioutil.io
 
 import io.github.kotlinmania.tokioutil.bytes.BytesMut

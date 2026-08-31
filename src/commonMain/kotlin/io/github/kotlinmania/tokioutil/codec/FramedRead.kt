@@ -1,4 +1,4 @@
-// port-lint: source codec/framed_read.rs
+// port-lint: source tokio-util/src/codec/framed_read.rs
 package io.github.kotlinmania.tokioutil.codec
 
 import io.github.kotlinmania.tokioutil.bytes.BytesMut
