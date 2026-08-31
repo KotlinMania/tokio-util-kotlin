@@ -1,4 +1,4 @@
-// port-lint: source codec/length_delimited.rs
+// port-lint: source tokio-util/src/codec/length_delimited.rs
 package io.github.kotlinmania.tokioutil.codec
 
 import io.github.kotlinmania.tokioutil.bytes.Bytes

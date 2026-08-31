@@ -1,4 +1,4 @@
-// port-lint: source time/wheel/mod.rs
+// port-lint: source tokio-util/src/time/wheel/mod.rs
 package io.github.kotlinmania.tokioutil.time.wheel
 
 /**

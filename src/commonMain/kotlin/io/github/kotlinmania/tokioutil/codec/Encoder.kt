@@ -1,4 +1,4 @@
-// port-lint: source codec/encoder.rs
+// port-lint: source tokio-util/src/codec/encoder.rs
 package io.github.kotlinmania.tokioutil.codec
 
 import io.github.kotlinmania.tokioutil.bytes.BytesMut

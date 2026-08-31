@@ -1,4 +1,4 @@
-// port-lint: source task/join_queue.rs
+// port-lint: source tokio-util/src/task/join_queue.rs
 package io.github.kotlinmania.tokioutil.task
 
 import kotlinx.coroutines.CoroutineScope

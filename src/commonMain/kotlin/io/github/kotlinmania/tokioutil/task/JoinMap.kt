@@ -1,4 +1,4 @@
-// port-lint: source task/join_map.rs
+// port-lint: source tokio-util/src/task/join_map.rs
 @file:OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 
 package io.github.kotlinmania.tokioutil.task
