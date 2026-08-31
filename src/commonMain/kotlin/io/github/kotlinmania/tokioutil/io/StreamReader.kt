@@ -15,6 +15,9 @@ internal class StreamReader(
     private var chunkOffset: Int = 0
 
     suspend fun read(dest: ByteArray, offset: Int, length: Int): Int {
+        dest.hashCode()
+        offset.hashCode()
+        length.hashCode()
         // Implementation for reading from the stream
         return 0
     }
