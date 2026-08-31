@@ -15,5 +15,20 @@
     "todos": true,
     "lint": true
   },
-  "reexport_modules": []
+  "reexport_modules": [
+    "lib.rs",
+    "net/mod.rs",
+    "net/unix/mod.rs",
+    "util/mod.rs",
+    "udp/mod.rs",
+    "codec/mod.rs",
+    "io/mod.rs",
+    "time/mod.rs",
+    "time/wheel/mod.rs",
+    "task/mod.rs",
+    "sync/mod.rs",
+    "sync/tests/mod.rs",
+    "future/mod.rs"
+  ]
 }
+
