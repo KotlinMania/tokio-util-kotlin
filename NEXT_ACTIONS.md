@@ -6,11 +6,11 @@ Based on AST analysis, here are the concrete next steps.
 
 - **Files Present:** 58/86 (67.4%)
 - **Function parity:** 164/862 matched (target 229) — 19.0%
-- **Class/type parity:** 39/159 matched (target 80) — 24.5%
-- **Combined symbol parity:** 203/1021 matched (target 309) — 19.9%
+- **Class/type parity:** 39/159 matched (target 79) — 24.5%
+- **Combined symbol parity:** 203/1021 matched (target 308) — 19.9%
 - **Average inline-code cosine:** 0.24 (function body across 45 matched files)
 - **Average documentation cosine:** 0.29 (doc text across 45 matched files)
-- **Cheat-zeroed Files:** 17
+- **Cheat-zeroed Files:** 16
 - **Critical Issues:** 55 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -649,18 +649,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 57. tokio-util.lib
-
-- **Target:** `tokioutil.Lib [STUB]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 58. tokio-util.cfg
+### 57. tokio-util.cfg
 
 - **Target:** `tokioutil.Cfg`
 - **Similarity:** 1.00
@@ -679,4 +668,17 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Matched
+
+| Source | Target | Path |
+|--------|--------|------|
+| `tokio-util.lib` | `tokioutil.Lib` | `tokio-util/src/lib` |
 
