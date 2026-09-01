@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/sync/tests/mod.rs
+// port-lint: source sync/tests/mod.rs
 package io.github.kotlinmania.tokioutil.sync.tests
 
 /**

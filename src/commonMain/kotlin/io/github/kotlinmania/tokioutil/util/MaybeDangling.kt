@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/util/maybe_dangling.rs
+// port-lint: source util/maybe_dangling.rs
 package io.github.kotlinmania.tokioutil.util
 
 /**

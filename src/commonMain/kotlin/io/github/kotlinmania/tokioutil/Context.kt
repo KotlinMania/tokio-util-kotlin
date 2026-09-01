@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/context.rs
+// port-lint: source context.rs
 package io.github.kotlinmania.tokioutil
 
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/lib.rs
+// port-lint: source lib.rs
 package io.github.kotlinmania.tokioutil
 
 import io.github.kotlinmania.tokioutil.codec.CodecModLedger

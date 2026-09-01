@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/tracing.rs
+// port-lint: source tracing.rs
 package io.github.kotlinmania.tokioutil
 
 /**

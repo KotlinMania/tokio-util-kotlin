@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/sync/cancellation_token/guard.rs
+// port-lint: source sync/cancellation_token/guard.rs
 package io.github.kotlinmania.tokioutil.sync.cancellationtoken
 
 /**
