@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/codec/mod.rs
+// port-lint: source codec/mod.rs
 package io.github.kotlinmania.tokioutil.codec
 
 /**

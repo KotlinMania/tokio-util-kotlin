@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/io/mod.rs
+// port-lint: source io/mod.rs
 package io.github.kotlinmania.tokioutil.io
 
 /**

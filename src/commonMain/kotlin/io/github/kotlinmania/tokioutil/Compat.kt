@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/compat.rs
+// port-lint: source compat.rs
 package io.github.kotlinmania.tokioutil
 
 /**

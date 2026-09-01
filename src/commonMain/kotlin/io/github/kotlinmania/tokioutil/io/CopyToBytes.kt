@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/io/copy_to_bytes.rs
+// port-lint: source io/copy_to_bytes.rs
 package io.github.kotlinmania.tokioutil.io
 
 /**

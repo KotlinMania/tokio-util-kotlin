@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/task/abort_on_drop.rs
+// port-lint: source task/abort_on_drop.rs
 package io.github.kotlinmania.tokioutil.task
 
 import kotlinx.coroutines.Job

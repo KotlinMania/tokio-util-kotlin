@@ -1,4 +1,4 @@
-// port-lint: tests tokio-util/src/task/task_tracker.rs
+// port-lint: tests task/task_tracker.rs
 package io.github.kotlinmania.tokioutil.task
 
 import kotlin.test.Test

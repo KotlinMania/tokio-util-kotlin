@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/io/sync_bridge.rs
+// port-lint: source io/sync_bridge.rs
 package io.github.kotlinmania.tokioutil.io
 
 /**

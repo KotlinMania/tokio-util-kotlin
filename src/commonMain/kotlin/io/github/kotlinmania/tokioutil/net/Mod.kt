@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/net/mod.rs
+// port-lint: source net/mod.rs
 package io.github.kotlinmania.tokioutil.net
 
 import io.github.kotlinmania.tokioutil.Either

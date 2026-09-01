@@ -1,4 +1,4 @@
-// port-lint: tests tokio-util/src/either.rs
+// port-lint: tests either.rs
 package io.github.kotlinmania.tokioutil
 
 import kotlin.test.Test

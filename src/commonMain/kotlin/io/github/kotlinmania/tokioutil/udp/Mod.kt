@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/udp/mod.rs
+// port-lint: source udp/mod.rs
 package io.github.kotlinmania.tokioutil.udp
 
 /**

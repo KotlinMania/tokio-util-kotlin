@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/util/poll_buf.rs
+// port-lint: source util/poll_buf.rs
 package io.github.kotlinmania.tokioutil.util
 
 import io.github.kotlinmania.tokioutil.bytes.Bytes

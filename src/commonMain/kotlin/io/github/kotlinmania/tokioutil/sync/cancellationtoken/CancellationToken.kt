@@ -1,4 +1,4 @@
-// port-lint: source tokio-util/src/sync/cancellation_token.rs
+// port-lint: source sync/cancellation_token.rs
 package io.github.kotlinmania.tokioutil.sync.cancellationtoken
 
 import kotlinx.coroutines.CompletableDeferred
