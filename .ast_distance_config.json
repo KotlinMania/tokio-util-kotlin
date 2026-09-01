@@ -16,19 +16,33 @@
     "lint": true
   },
   "reexport_modules": [
+    "lib",
     "lib.rs",
+    "tokio-util/src/lib.rs",
     "net/mod.rs",
+    "tokio-util/src/net/mod.rs",
     "net/unix/mod.rs",
+    "tokio-util/src/net/unix/mod.rs",
     "util/mod.rs",
+    "tokio-util/src/util/mod.rs",
     "udp/mod.rs",
+    "tokio-util/src/udp/mod.rs",
     "codec/mod.rs",
+    "tokio-util/src/codec/mod.rs",
     "io/mod.rs",
+    "tokio-util/src/io/mod.rs",
     "time/mod.rs",
+    "tokio-util/src/time/mod.rs",
     "time/wheel/mod.rs",
+    "tokio-util/src/time/wheel/mod.rs",
     "task/mod.rs",
+    "tokio-util/src/task/mod.rs",
     "sync/mod.rs",
+    "tokio-util/src/sync/mod.rs",
     "sync/tests/mod.rs",
-    "future/mod.rs"
+    "tokio-util/src/sync/tests/mod.rs",
+    "future/mod.rs",
+    "tokio-util/src/future/mod.rs"
   ]
 }
 
