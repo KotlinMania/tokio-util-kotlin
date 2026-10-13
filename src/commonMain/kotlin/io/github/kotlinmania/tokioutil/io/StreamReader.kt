@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.flow
 internal class StreamReader(
     private val flow: Flow<Bytes>,
 ) {
-    private var currentChunk: Bytes? = null
-    private var chunkOffset: Int = 0
+    private val currentChunk: Bytes? = null
+    private val chunkOffset: Int = 0
 
     suspend fun read(dest: ByteArray, offset: Int, length: Int): Int {
         dest.hashCode()

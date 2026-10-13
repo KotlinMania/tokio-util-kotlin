@@ -51,7 +51,7 @@ class LengthDelimitedCodec(
             throw IllegalStateException("frame length $n exceeds maximum ${builder.maxFrameLen}")
         }
 
-        var adjusted = n.toInt() + builder.lengthAdjustment
+        val adjusted = n.toInt() + builder.lengthAdjustment
         if (adjusted < 0) {
             throw IllegalArgumentException("adjusted length $adjusted is negative")
         }
@@ -69,7 +69,10 @@ class LengthDelimitedCodec(
                     state = DecodeState.Data(head)
                     head
                 }
-                is DecodeState.Data -> s.len
+
+                is DecodeState.Data -> {
+                    s.len
+                }
             }
 
         if (src.len() < n) {
