@@ -1,7 +1,7 @@
 // port-lint: source io/stream_reader.rs
 package io.github.kotlinmania.tokioutil.io
 
-import io.github.kotlinmania.tokioutil.bytes.Bytes
+import io.github.kotlinmania.bytes.Bytes
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

@@ -1,7 +1,7 @@
 // port-lint: source codec/decoder.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * Decoding of frames via buffers.

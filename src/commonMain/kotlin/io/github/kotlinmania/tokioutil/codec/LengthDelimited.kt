@@ -1,8 +1,8 @@
 // port-lint: source codec/length_delimited.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.Bytes
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.Bytes
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * A codec for frames delimited by a frame head specifying their lengths.
@@ -37,13 +37,14 @@ class LengthDelimitedCodec(
 
         val offset = builder.lengthFieldOffset
         var n: Long = 0
+        val slice = src.deref()
         if (builder.lengthFieldIsBigEndian) {
             for (i in 0 until fieldLen) {
-                n = (n shl 8) or (src[offset + i].toLong() and 0xFFL)
+                n = (n shl 8) or (slice[offset + i].toLong() and 0xFFL)
             }
         } else {
             for (i in fieldLen - 1 downTo 0) {
-                n = (n shl 8) or (src[offset + i].toLong() and 0xFFL)
+                n = (n shl 8) or (slice[offset + i].toLong() and 0xFFL)
             }
         }
 
@@ -102,15 +103,15 @@ class LengthDelimitedCodec(
 
         if (builder.lengthFieldIsBigEndian) {
             for (i in fieldLen - 1 downTo 0) {
-                dst.put(((adjusted ushr (i * 8)) and 0xFF).toByte())
+                dst.putI8(((adjusted ushr (i * 8)) and 0xFF).toByte())
             }
         } else {
             for (i in 0 until fieldLen) {
-                dst.put(((adjusted ushr (i * 8)) and 0xFF).toByte())
+                dst.putI8(((adjusted ushr (i * 8)) and 0xFF).toByte())
             }
         }
 
-        dst.put(data)
+        dst.extendFromSlice(data.asSlice())
     }
 
     class Builder(

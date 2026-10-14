@@ -1,7 +1,7 @@
 // port-lint: source codec/framed_impl.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 
 internal class ReadFrame(
     var eof: Boolean = false,

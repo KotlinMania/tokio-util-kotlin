@@ -1,7 +1,7 @@
 // port-lint: tests ../tests/codecs.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
@@ -37,23 +37,23 @@ class CodecTest {
 
         val decoded = codec.decode(buf)
         assertEquals(4, decoded?.len())
-        assertContentEquals(byteArrayOf(1, 2, 3, 4), decoded?.toByteArray())
+        assertContentEquals(byteArrayOf(1, 2, 3, 4), decoded?.deref())
     }
 
     @Test
     fun testAnyDelimiterCodec() {
         val codec = AnyDelimiterCodec.new(byteArrayOf(','.code.toByte()), byteArrayOf(','.code.toByte()))
         val buf = BytesMut.new()
-        buf.put("alpha,beta,gamma".encodeToByteArray())
+        buf.extendFromSlice("alpha,beta,gamma".encodeToByteArray())
 
         val item1 = codec.decode(buf)
-        assertEquals("alpha", item1?.toByteArray()?.decodeToString())
+        assertEquals("alpha", item1?.asString())
 
         val item2 = codec.decode(buf)
-        assertEquals("beta", item2?.toByteArray()?.decodeToString())
+        assertEquals("beta", item2?.asString())
 
         val item3 = codec.decodeEof(buf)
-        assertEquals("gamma", item3?.toByteArray()?.decodeToString())
+        assertEquals("gamma", item3?.asString())
     }
 
     @Test
@@ -72,6 +72,6 @@ class CodecTest {
 
         val decoded = codec.decode(buf)
         assertEquals(3, decoded?.len())
-        assertContentEquals(byteArrayOf(10, 20, 30), decoded?.toByteArray())
+        assertContentEquals(byteArrayOf(10, 20, 30), decoded?.deref())
     }
 }

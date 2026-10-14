@@ -1,8 +1,8 @@
 // port-lint: source util/poll_buf.rs
 package io.github.kotlinmania.tokioutil.util
 
-import io.github.kotlinmania.tokioutil.bytes.Bytes
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.Bytes
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * Try to read data from an asynchronous reader into a [BytesMut] buffer.
@@ -15,7 +15,7 @@ fun pollReadBuf(
     val temp = ByteArray(maxReadSize)
     val bytesRead = readAction(temp, 0, temp.size)
     if (bytesRead > 0) {
-        buf.put(temp, 0, bytesRead)
+        buf.extendFromSlice(temp.copyOfRange(0, bytesRead))
     }
     return bytesRead
 }
@@ -30,7 +30,7 @@ fun pollWriteBuf(
     if (buf.isEmpty()) {
         return 0
     }
-    val bytes = buf.toByteArray()
+    val bytes = buf.deref()
     val written = writeAction(bytes, 0, bytes.size)
     if (written > 0) {
         buf.splitTo(written)

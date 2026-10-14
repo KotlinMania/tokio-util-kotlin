@@ -1,7 +1,7 @@
 // port-lint: source udp/frame.rs
 package io.github.kotlinmania.tokioutil.udp
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * Socket address representation for UDP frames.

@@ -1,7 +1,7 @@
 // port-lint: source io/simplex.rs
 package io.github.kotlinmania.tokioutil.io
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -17,7 +17,7 @@ class SimplexReceiver internal constructor(
             val available = minOf(length, buffer.len())
             if (available > 0) {
                 val chunk = buffer.splitTo(available)
-                val bytes = chunk.toByteArray()
+                val bytes = chunk.deref()
                 bytes.copyInto(dest, offset, 0, available)
             }
             available
@@ -33,7 +33,8 @@ class SimplexSender internal constructor(
 ) {
     suspend fun write(src: ByteArray, offset: Int, length: Int): Int =
         mutex.withLock {
-            buffer.put(src, offset, length)
+            val slice = if (offset == 0 && length == src.size) src else src.copyOfRange(offset, offset + length)
+            buffer.extendFromSlice(slice)
             length
         }
 }
