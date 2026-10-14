@@ -1,7 +1,7 @@
 // port-lint: source io/read_buf.rs
 package io.github.kotlinmania.tokioutil.io
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * Reads data from an asynchronous source into a [BytesMut] buffer.
@@ -13,7 +13,7 @@ suspend fun readBuf(
     val temp = ByteArray(4096)
     val n = readSource(temp, 0, temp.size)
     if (n > 0) {
-        buf.put(temp, 0, n)
+        buf.extendFromSlice(temp.copyOfRange(0, n))
     }
     return n
 }

@@ -1,7 +1,7 @@
 // port-lint: source io/reader_stream.rs
 package io.github.kotlinmania.tokioutil.io
 
-import io.github.kotlinmania.tokioutil.bytes.Bytes
+import io.github.kotlinmania.bytes.Bytes
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -18,7 +18,7 @@ internal class ReaderStream(
             while (true) {
                 val read = readFn(buf)
                 if (read <= 0) break
-                emit(Bytes.copyFromSlice(buf, 0, read))
+                emit(Bytes.copyFromSlice(buf.copyOfRange(0, read)))
             }
         }
 

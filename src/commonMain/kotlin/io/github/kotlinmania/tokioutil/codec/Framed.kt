@@ -1,7 +1,7 @@
 // port-lint: source codec/framed.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * A unified interface to an underlying I/O object, using [Encoder] and [Decoder]

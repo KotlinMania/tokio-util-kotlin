@@ -1,7 +1,7 @@
 // port-lint: source codec/lines_codec.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * A simple [Decoder] and [Encoder] implementation that splits up data into lines.
@@ -24,8 +24,9 @@ class LinesCodec(
                 )
 
             var newlineOffset: Int? = null
+            val slice = src.deref()
             for (i in nextIndex until readTo) {
-                if (src[i] == '\n'.code.toByte()) {
+                if (slice[i] == '\n'.code.toByte()) {
                     newlineOffset = i - nextIndex
                     break
                 }
@@ -47,7 +48,7 @@ class LinesCodec(
                 if (newlineOffset != null) {
                     val newlineIndex = newlineOffset + nextIndex
                     nextIndex = 0
-                    val lineBytes = src.splitTo(newlineIndex + 1).toByteArray()
+                    val lineBytes = src.splitTo(newlineIndex + 1).deref()
                     var end = lineBytes.size - 1 // skip '\n'
                     if (end > 0 && lineBytes[end - 1] == '\r'.code.toByte()) {
                         end -= 1
@@ -73,7 +74,7 @@ class LinesCodec(
         if (buf.isEmpty()) {
             return null
         }
-        val bytes = buf.splitTo(buf.len()).toByteArray()
+        val bytes = buf.splitTo(buf.len()).deref()
         var end = bytes.size
         if (end > 0 && bytes[end - 1] == '\r'.code.toByte()) {
             end -= 1
@@ -87,8 +88,8 @@ class LinesCodec(
     override fun encode(item: String, dst: BytesMut) {
         val bytes = item.encodeToByteArray()
         dst.reserve(bytes.size + 1)
-        dst.put(bytes)
-        dst.put('\n'.code.toByte())
+        dst.extendFromSlice(bytes)
+        dst.putI8('\n'.code.toByte())
     }
 
     companion object {

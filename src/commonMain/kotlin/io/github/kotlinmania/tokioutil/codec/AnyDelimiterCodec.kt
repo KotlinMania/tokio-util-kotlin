@@ -1,8 +1,8 @@
 // port-lint: source codec/any_delimiter_codec.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.Bytes
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.Bytes
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * A simple [Decoder] and [Encoder] implementation that splits up data into chunks based on any delimiter byte.
@@ -27,8 +27,9 @@ class AnyDelimiterCodec(
                 )
 
             var chunkOffset: Int? = null
+            val slice = src.deref()
             for (i in nextIndex until readTo) {
-                if (seekDelimiters.contains(src[i])) {
+                if (seekDelimiters.contains(slice[i])) {
                     chunkOffset = i - nextIndex
                     break
                 }
@@ -80,8 +81,8 @@ class AnyDelimiterCodec(
     override fun encode(item: String, dst: BytesMut) {
         val bytes = item.encodeToByteArray()
         dst.reserve(bytes.size + sequenceWriter.size)
-        dst.put(bytes)
-        dst.put(sequenceWriter)
+        dst.extendFromSlice(bytes)
+        dst.extendFromSlice(sequenceWriter)
     }
 
     companion object {

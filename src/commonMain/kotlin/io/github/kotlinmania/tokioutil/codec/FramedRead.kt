@@ -1,7 +1,7 @@
 // port-lint: source codec/framed_read.rs
 package io.github.kotlinmania.tokioutil.codec
 
-import io.github.kotlinmania.tokioutil.bytes.BytesMut
+import io.github.kotlinmania.bytes.BytesMut
 
 /**
  * A stream of messages decoded from an underlying I/O object.
