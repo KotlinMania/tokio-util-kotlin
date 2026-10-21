@@ -1,4 +1,3 @@
-// port-lint: source net/mod.rs
 package io.github.kotlinmania.tokioutil.net
 
 import io.github.kotlinmania.tokioutil.Either
