@@ -33,11 +33,4 @@ internal object FutureExt {
         WithCancellationTokenFutureOwned.new(cancellationToken, block)
 }
 
-/**
- * Module ledger for future utilities.
- */
-internal object FutureModLedger {
-    val futureExt = FutureExt
-    val withCancellationTokenFutureClass = WithCancellationTokenFuture::class
-    val withCancellationTokenFutureOwnedClass = WithCancellationTokenFutureOwned::class
-}
+
